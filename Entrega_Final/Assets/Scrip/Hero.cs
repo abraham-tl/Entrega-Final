@@ -8,9 +8,9 @@ public class Hero : MonoBehaviour
    
     void Start()
     {
-        gameObject.GetComponent<Renderer>().material.color = Color.gray;// se asigna al heroe el color gris
+        this.gameObject.GetComponent<Renderer>().material.color = Color.gray;// se asigna al heroe el color gris
         //gameObject.AddComponent(typeof(FPSMove));//Se le asigna la clase FPSMove al GameObject para el movimiento
-        gameObject.tag = "Hero";       //Se tagea el ciudadano
+        this.gameObject.tag = "Player";       //Se tagea el ciudadano
         Camera.main.transform.localPosition = transform.position;//se le asigna a la camara la misposicion del heroe
         Camera.main.transform.SetParent(gameObject.transform);//se hace la camara hija del heroe
         Camera.main.gameObject.AddComponent<FPSAim>();//se le agrega la la clase FPSAim a la camara para la rotacion    
