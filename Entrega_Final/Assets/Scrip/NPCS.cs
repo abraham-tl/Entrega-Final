@@ -32,27 +32,14 @@ public class NPCS : MonoBehaviour {
 
     public virtual void Inicializar()
     {
-        Asignar_Color();
-        //Asignar_edad();
+       
+        Asignar_edad();
         speed = ((100f - edad) / 50f);
         StartCoroutine(DecideState());
     }
 
 
-    public Color Asignar_Color()
-    {
-        Color color = Color.white;
 
-        int a = Random.Range(0,4);
-        switch (a)
-        {
-            case  1: color = Color.black;break;
-            case 2:  color = Color.blue; break;
-            case 3: color = Color.cyan; break;    
-        }
-        gameObject.GetComponent<Renderer>().material.color = color;
-        return color;
-    }
     public void Movimiento()
     {
         if(state == States.Moving)

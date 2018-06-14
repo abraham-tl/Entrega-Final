@@ -30,6 +30,22 @@ public class Enemy : NPCS
         base.Inicializar();
         Asignar_Color();
         gusto = (Gusto)Random.Range(0,5);
-        print(" GUSTO = " + gusto);
+      
+    }
+
+    public Color Asignar_Color()
+    {
+        Color color = Color.white;
+
+        int a = Random.Range(0, 4);
+        switch (a)
+        {
+            case 0: color = Color.green; break;
+            case 1: color = Color.black; break;
+            case 2: color = Color.blue; break;
+            case 3: color = Color.cyan; break;
+        }
+        gameObject.GetComponent<Renderer>().material.color = color;
+        return color;
     }
 }

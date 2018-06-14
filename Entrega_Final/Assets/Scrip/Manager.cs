@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class Manager : MonoBehaviour
 {
 
-    //public Text num_ally;//Variable de texto para la cantidad de ciudadanos
+    public Text num_ally;//Variable de texto para la cantidad de ciudadanos
     public Text num_enemy;//Variable de texto para la cantidad de Zombies
     int ally = 0; //Entero para el contador de Ciudadanos
     int enemy = 0;//Entero para el contador de Zombies
@@ -22,12 +22,12 @@ public class Manager : MonoBehaviour
    
     void Start ()
     {
+        
         numboxes = Random.Range(10,20);// aleatorio para el numero de instancias
 
         ////Ciclo para crear las instancias
         for (int k = 0; k < numboxes; k++)
-        {
-     
+        {          
             GameObject cube =  GameObject.CreatePrimitive(PrimitiveType.Cube); //se crea una primitiva en la variable Game Object
             cube.transform.position = Asignar_Posicion();//Se asigna una posisicion en el plano
             cube.AddComponent<Rigidbody>();// se asigna un rigidbodi al objeto
@@ -48,10 +48,15 @@ public class Manager : MonoBehaviour
                 }
             
 
-          // boxes[k] = cube;//Se Guarda el Gameobject de la calse en el vector
+         // boxes[k] = cube;//Se Guarda el Gameobject de la calse en el vector
         }
-        Contar_NPCs();//Se llama el procedimiento para contal los NPC   
-        print(enemy);
+        //Contar_NPCs();//Se llama el procedimiento para contal los NPC   
+        Enemy[] enemies = FindObjectsOfType<Enemy>();
+        num_enemy.text = enemies.Length.ToString();
+
+        Ally[] allies = FindObjectsOfType<Ally>();     
+        num_ally.text = allies.Length.ToString();
+        //print(enemies[0].gameObject.transform.position);
     }
 
         //Funcion que retorna un Vector3 para la posicion
@@ -61,9 +66,9 @@ public class Manager : MonoBehaviour
         Vector3 Asignar_Posicion()
         {
             Vector3 pos = new Vector3();
-            pos.x = Random.Range(-10, 10);
+            pos.x = Random.Range(-20, 20);
             pos.y = -0.5f;
-            pos.z = Random.Range(-10, 10);
+            pos.z = Random.Range(-20, 20);
             return pos;
         }
 
@@ -80,7 +85,8 @@ public class Manager : MonoBehaviour
                 ally += 1;
             }
         }
-        num_ally.text = ally.ToString();//convierte el acomolador a dtrin y lo asigna al texto
+        print(enemy);
+        //num_ally.text = ally.ToString();//convierte el acomolador a dtrin y lo asigna al texto
         num_enemy.text = enemy.ToString();//convierte el acomolador a dtrin y lo asigna al texto
     }
 }
