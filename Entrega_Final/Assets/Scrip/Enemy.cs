@@ -14,8 +14,7 @@ public class Enemy : NPCS
 	// Use this for initialization
 	void Start ()
     {
-       Inicializar();
-      
+       Inicializar();       
 	}
 	
 	// Update is called once per frame
@@ -23,7 +22,6 @@ public class Enemy : NPCS
     {
         Movimiento();
 	}
-
 
     public override void Inicializar()
     {
@@ -48,4 +46,15 @@ public class Enemy : NPCS
         gameObject.GetComponent<Renderer>().material.color = color;
         return color;
     }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Bala")
+        {
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+            Eliminar_Enemy();
+        }
+    }
+
 }

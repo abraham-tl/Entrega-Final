@@ -8,21 +8,13 @@ using UnityEngine.UI;
 
 public class Manager : MonoBehaviour
 {
-
     public Text num_ally;//Variable de texto para la cantidad de ciudadanos
     public Text num_enemy;//Variable de texto para la cantidad de Zombies
-    int ally = 0; //Entero para el contador de Ciudadanos
-    int enemy = 0;//Entero para el contador de Zombies
-    //const int max_NPC = 25; //Constante para el maximo de instancias
-    //Struc_Manager datos_manager;// variable de tipo estructura manager
-    //Variable para asignar numeros de instancia
-
     public int numboxes; //Variable para asignar numeros de instancia
     public GameObject[] boxes; //Vector para guardar los personajes
    
     void Start ()
-    {
-        
+    {      
         numboxes = Random.Range(10,20);// aleatorio para el numero de instancias
 
         ////Ciclo para crear las instancias
@@ -50,12 +42,19 @@ public class Manager : MonoBehaviour
 
          // boxes[k] = cube;//Se Guarda el Gameobject de la calse en el vector
         }
-        //Contar_NPCs();//Se llama el procedimiento para contal los NPC   
-        Enemy[] enemies = FindObjectsOfType<Enemy>();
-        num_enemy.text = enemies.Length.ToString();
+        //Contar_NPCs();//Se llama el procedimiento para contal los NPC  
+        
 
-        Ally[] allies = FindObjectsOfType<Ally>();     
-        num_ally.text = allies.Length.ToString();
+
+        Enemy[] enemies = FindObjectsOfType<Enemy>();
+        Statics.enemy = enemies.Length;
+        num_enemy.text = Statics.enemy.ToString();
+
+        Ally[] allies = FindObjectsOfType<Ally>();
+        Statics.ally = allies.Length;
+        num_ally.text = Statics.ally.ToString();
+
+        print(Statics.enemy);
         //print(enemies[0].gameObject.transform.position);
     }
 
@@ -72,21 +71,35 @@ public class Manager : MonoBehaviour
             return pos;
         }
 
-    void Contar_NPCs()
-    {
-        foreach (GameObject o in boxes)//recorre el vector para contar los NPC
-        {
-            if (o.tag == "Zombie")
-            {
-                enemy += 1;
-            }
-            if (o.tag == "Ciudadano")
-            {
-                ally += 1;
-            }
-        }
-        print(enemy);
+    //void Contar_NPCs()
+    //{
+    //    foreach (GameObject o in boxes)//recorre el vector para contar los NPC
+    //    {
+    //        if (o.tag == "Zombie")
+    //        {
+    //            Statics.enemy += 1;
+    //        }
+    //        if (o.tag == "Ciudadano")
+    //        {
+    //            Statics.ally += 1;
+    //        }
+    //    }
+        
         //num_ally.text = ally.ToString();//convierte el acomolador a dtrin y lo asigna al texto
-        num_enemy.text = enemy.ToString();//convierte el acomolador a dtrin y lo asigna al texto
+      //convierte el acomolador a dtrin y lo asigna al texto
+    //}
+    public void Eliminar_Enemy()
+    {
+        int a = Statics.enemy;
+            a = a - 1;
+        Statics.enemy = a;
+        print(Statics.enemy);
+        num_enemy.text = a.ToString();
+    }
+    
+    public void Eliminar_Ally()
+    {
+        Statics.ally -= Statics.ally;
+        num_ally.text = Statics.ally.ToString();
     }
 }

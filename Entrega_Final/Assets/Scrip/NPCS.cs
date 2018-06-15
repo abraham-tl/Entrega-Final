@@ -7,12 +7,13 @@ public enum States
     Idle, Moving, Rotating, Reacting
 };
 
-public class NPCS : MonoBehaviour {
+public class NPCS : Manager {
     bool active = false;
     int edad = 0;
     float speed = 0f;
     States state;
     Vector3 rotating;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -65,4 +66,5 @@ public class NPCS : MonoBehaviour {
         StartCoroutine(DecideState());
         rotating.y = Random.Range(-1, 2);
     }
+
 }
