@@ -7,7 +7,7 @@ public enum States
     Idle, Moving, Rotating, Reacting
 };
 
-public class NPCS : Manager {
+public class NPCS : MonoBehaviour{
     bool active = false;
     int edad = 0;
     float speed = 0f;
@@ -67,4 +67,8 @@ public class NPCS : Manager {
         rotating.y = Random.Range(-1, 2);
     }
 
+    public int Get_Edad()
+    {
+        return edad;
+    }
 }

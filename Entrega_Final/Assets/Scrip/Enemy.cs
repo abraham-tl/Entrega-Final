@@ -51,9 +51,16 @@ public class Enemy : NPCS
     {
         if(collision.gameObject.tag == "Bala")
         {
+            FindObjectOfType<Manager>().Eliminar_Enemy();
             Destroy(collision.gameObject);
             Destroy(gameObject);
-            Eliminar_Enemy();
+          
+        }
+
+        if (collision.gameObject.tag == "Ciudadano")
+        {
+
+            print("MUEREEEEE");
         }
     }
 

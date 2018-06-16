@@ -19,15 +19,16 @@ public class Hero : MonoBehaviour
     //procedimiento para cuando el heroe choque con otro objeto
     private void OnCollisionEnter(Collision collision)
     {
-        //if (collision.gameObject.tag == "Zombie") 
-        //{           
-        //    //si choca con un objeto tageado como Zombie imprime mensaje + gusto que desea comer
-        //    Debug.Log("Waaaarrrr Quiero comer "+ collision.gameObject.GetComponent<Zombie>().datos_zombie.gusto ); 
-        //}
-        //else if(collision.gameObject.tag == "Ciudadano")
-        //{
-        //    //si choca con un objeto tageado como Ciudadano imprime mensaje + nombre + edad
-        //    Debug.Log("Hola soy  " + collision.gameObject.GetComponent<Ciudadano>().datos_ciudadano.nombre + " y tengo " + collision.gameObject.GetComponent<Ciudadano>().datos_ciudadano.edad + " años");
-        //}
+        if (collision.gameObject.tag == "Zombie")
+        {
+            FindObjectOfType<Manager>().Bajar_Vida();
+            //si choca con un objeto tageado como Zombie imprime mensaje + gusto que desea comer
+            //Debug.Log("Waaaarrrr Quiero comer " + collision.gameObject.GetComponent<Zombie>().datos_zombie.gusto);
+        }
+        else if (collision.gameObject.tag == "Ciudadano")
+        {
+            //si choca con un objeto tageado como Ciudadano imprime mensaje + nombre + edad
+            //Debug.Log("Hola soy  " + collision.gameObject.GetComponent<Ally>().name + " y tengo " + collision.gameObject.GetComponent<Ally>().Get_Edad + " años");
+        }
     }
 }
