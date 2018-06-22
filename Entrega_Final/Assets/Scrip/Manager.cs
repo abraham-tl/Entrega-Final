@@ -10,22 +10,28 @@ public class Manager : MonoBehaviour
 {
     public Text num_ally;//Variable de texto para la cantidad de ciudadanos
     public Text num_enemy;//Variable de texto para la cantidad de Zombies
+    
     public Image imagen;
     public int numboxes; //Variable para asignar numeros de instancia
     public GameObject[] boxes; //Vector para guardar los personajes
 
     public static int enemyNumber;
     public static int allyNumber;
+
     public int vida;
 
+    public Canvas canvas_go;
+    public Canvas canvas_winer;
+
     public float max_imagen, min_imagen;
+   
     void Start ()
     {
-                   Cursor.lockState = CursorLockMode.Locked;
-        
+        Cursor.lockState = CursorLockMode.Locked;
         numboxes = Random.Range(10,20);// aleatorio para el numero de instancias
         vida = 400;
         max_imagen = vida;
+       
         ////Ciclo para crear las instancias
         for (int k = 0; k < numboxes; k++)
         {          
@@ -62,15 +68,30 @@ public class Manager : MonoBehaviour
         Ally[] allies = FindObjectsOfType<Ally>();
         allyNumber = allies.Length;
         num_ally.text = allyNumber.ToString();
-
+        
+       // Canvas[] canvas_ = FindObjectOfType<Canvas>();
         //print(enemies[0].gameObject.transform.position);
     }
 
-        //Funcion que retorna un Vector3 para la posicion
+    private void Update()
+    {
+        if (enemyNumber <=0)
+        {
+            canvas_winer.gameObject.SetActive(true);
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+        if (allyNumber <= 0)
+        {
+            canvas_go.gameObject.SetActive(true);
+            Camera.main.transform.SetParent(null);
+            FindObjectOfType<Hero>().gameObject.SetActive(false);
+        }
+    }
+    //Funcion que retorna un Vector3 para la posicion
 
-  
-        
-        Vector3 Asignar_Posicion()
+
+
+    Vector3 Asignar_Posicion()
         {
             Vector3 pos = new Vector3();
             pos.x = Random.Range(-20, 20);
@@ -85,18 +106,24 @@ public class Manager : MonoBehaviour
         //print(num_enemy);
         num_enemy.text = enemyNumber.ToString();
     }
-
+    public void Crear_Enemy()
+    {
+        enemyNumber++;
+        //print(num_enemy);
+        num_enemy.text = enemyNumber.ToString();
+    }
 
     public void Bajar_Vida()
     {    
-        vida = vida - 40;
-        print(vida);
+        vida = vida - 80;
         imagen.fillAmount = (vida) / max_imagen;
     }
-    //public void Eliminar_Ally()
-    //{
-    //    Statics.ally -= Statics.ally;
-    //    num_ally.text = Statics.ally.ToString();
-    //}
+
+    public void Eliminar_Ally()
+    {
+       allyNumber --;
+        num_ally.text = allyNumber.ToString();
+    }
+
 
 }

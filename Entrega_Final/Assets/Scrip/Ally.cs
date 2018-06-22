@@ -24,4 +24,10 @@ public class Ally : NPCS {
     {
         name = (nombre)Random.Range(0, 20);
     }
+
+    public static implicit operator Enemy(Ally ally)
+    {
+        Enemy e = ally.gameObject.AddComponent<Enemy>();
+        return e;
+    }
 }

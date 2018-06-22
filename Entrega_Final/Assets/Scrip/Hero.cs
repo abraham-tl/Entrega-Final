@@ -14,6 +14,7 @@ public class Hero : MonoBehaviour
         Camera.main.transform.localPosition = transform.position;//se le asigna a la camara la misposicion del heroe
         Camera.main.transform.SetParent(gameObject.transform);//se hace la camara hija del heroe
         Camera.main.gameObject.AddComponent<FPSAim>();//se le agrega la la clase FPSAim a la camara para la rotacion    
+        
     }
 
     //procedimiento para cuando el heroe choque con otro objeto
@@ -28,7 +29,9 @@ public class Hero : MonoBehaviour
         else if (collision.gameObject.tag == "Ciudadano")
         {
             //si choca con un objeto tageado como Ciudadano imprime mensaje + nombre + edad
-            //Debug.Log("Hola soy  " + collision.gameObject.GetComponent<Ally>().name + " y tengo " + collision.gameObject.GetComponent<Ally>().Get_Edad + " años");
+            int a = collision.gameObject.GetComponent<Ally>().Get_Edad();
+            Debug.Log("Hola soy  " + collision.gameObject.GetComponent<Ally>().name + " y tengo " + a);
+           //  + " años"
         }
     }
 }

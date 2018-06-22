@@ -59,8 +59,11 @@ public class Enemy : NPCS
 
         if (collision.gameObject.tag == "Ciudadano")
         {
-
-            print("MUEREEEEE");
+            Ally a = collision.gameObject.GetComponent<Ally>();    
+            Enemy e = a;
+            e.tag = "Zombie";            
+            FindObjectOfType<Manager>().Crear_Enemy();
+            FindObjectOfType<Manager>().Eliminar_Ally();
         }
     }
 
