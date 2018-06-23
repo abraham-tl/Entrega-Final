@@ -466,6 +466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e43bef13d5ca08f4f9c07a25a4b48f3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  life: 100
 --- !u!1 &423389363
 GameObject:
   m_ObjectHideFlags: 0
@@ -1137,6 +1138,7 @@ MonoBehaviour:
   num_enemy: {fileID: 423389365}
   imagen: {fileID: 1890051068}
   numboxes: 0
+  hero: {fileID: 342460495}
   boxes: []
   vida: 0
   canvas_go: {fileID: 1983015692}

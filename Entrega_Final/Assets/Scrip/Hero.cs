@@ -5,7 +5,7 @@ using UnityEngine;
 //using NPC.Ally;
 public class Hero : MonoBehaviour
 {
-    float life = 100f; 
+   public  float life = 100f; 
     void Start()
     {
         this.gameObject.GetComponent<Renderer>().material.color = Color.gray;// se asigna al heroe el color gris

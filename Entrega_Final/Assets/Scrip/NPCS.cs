@@ -9,8 +9,8 @@ public enum States
 
 public class NPCS : MonoBehaviour{
     bool active = false;
-    int edad = 0;
-    float speed = 0f;
+     int edad = 0;
+    public float speed = 0f;
     States state;
     Vector3 rotating;
 
@@ -50,6 +50,10 @@ public class NPCS : MonoBehaviour{
         if (state == States.Rotating)
         {
             transform.eulerAngles += rotating;
+        }
+        if (state == States.Reacting)
+        {
+            
         }
     }
 

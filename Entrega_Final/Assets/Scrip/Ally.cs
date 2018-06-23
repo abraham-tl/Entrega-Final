@@ -28,6 +28,8 @@ public class Ally : NPCS {
     public static implicit operator Enemy(Ally ally)
     {
         Enemy e = ally.gameObject.AddComponent<Enemy>();
+       
+        Destroy(ally);
         return e;
     }
 }

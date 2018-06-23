@@ -11,17 +11,19 @@ Cerebro, Pierna, Brazo,Ojos,Cuello
 public class Enemy : NPCS
 {
     Gusto gusto;
-	// Use this for initialization
-	void Start ()
+    GameObject[] objectos;
+    // Use this for initialization
+    void Start ()
     {
        Inicializar();
-        
-	}
+       objectos = GameObject.FindObjectsOfType(typeof(GameObject)) as GameObject[];
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
         Movimiento();
+        buscar();
 	}
 
     public override void Inicializar()
@@ -66,6 +68,28 @@ public class Enemy : NPCS
             FindObjectOfType<Manager>().Crear_Enemy();
             FindObjectOfType<Manager>().Eliminar_Ally();
         }
-    }
 
+    }
+    void buscar()
+    {
+        foreach (GameObject a in objectos)
+        {
+           if (a != null)
+           {      
+                if (a.GetComponent<Hero>() || a.GetComponent<Ally>())
+                {
+                    float dist = Vector3.Distance(a.transform.position, transform.position);
+
+                    if (dist < 5f)
+                    {
+                         Vector3 direccion = a.transform.position - transform.position;
+                        dist = direccion.magnitude;
+                        transform.LookAt(a.transform.position);
+                        transform.position += Vector3.Normalize(a.transform.position - transform.position) * speed * Time.deltaTime;
+                    }
+                }
+           }
+      
+        }
+    }
 }
