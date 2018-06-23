@@ -8,14 +8,15 @@ public class Arma : MonoBehaviour {
 
     public float rotationSpeed = 150.0F;
     public GameObject proyectil;
+    public GameObject box_ammo;
     public Transform inicio;
     public float force = 10f;
 
     int amon;
     // Use this for initialization
     void Start () {
-        Recargar_arm();
-	}
+        Crear_Ammo();
+    }
 
     // Update is called once per frame
     void Update() {
@@ -42,10 +43,17 @@ public class Arma : MonoBehaviour {
        
     }
 
-    public void Recargar_arm()
+    public void Recargar(int a)
     {
-        amon = amon + 15;
+        amon += a;
         num_amon.text = amon.ToString();
     }
 
+    public void Crear_Ammo()
+    {
+        Recargar(15);
+        GameObject ammo = Instantiate(box_ammo);
+        ammo.transform.position = new Vector3(Random.Range(-20, 20), -0.5f, Random.Range(-20, 20));
+        ammo.gameObject.tag = "Ammo";
+    }
 }

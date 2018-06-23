@@ -14,7 +14,8 @@ public class Enemy : NPCS
 	// Use this for initialization
 	void Start ()
     {
-       Inicializar();       
+       Inicializar();
+        
 	}
 	
 	// Update is called once per frame

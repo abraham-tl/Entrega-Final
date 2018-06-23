@@ -33,5 +33,11 @@ public class Hero : MonoBehaviour
             Debug.Log("Hola soy  " + collision.gameObject.GetComponent<Ally>().name + " y tengo " + a);
            //  + " años"
         }
+
+        if (collision.gameObject.tag == "Ammo")
+        {
+            FindObjectOfType<Arma>().Crear_Ammo();
+            Destroy(collision.gameObject);
+        }
     }
 }
