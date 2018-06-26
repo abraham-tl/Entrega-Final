@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ public class Enemy : NPCS
 {
     Gusto gusto;
     GameObject[] objectos;
+    public Color color;
     // Use this for initialization
     void Start ()
     {
@@ -23,22 +25,29 @@ public class Enemy : NPCS
 	void Update ()
     {
         Movimiento();
-        buscar();
-	}
+        Identificar_enemigo(typeof(Ally));
+        //if (target)
+        //{
+        //    state = States.Reacting;
+
+        //    Reaccion();
+        //}
+        //buscar();
+    }
 
     public override void Inicializar()
     {
         base.Inicializar();
         Asignar_Color();
-        gusto = (Gusto)Random.Range(0,5);
+        gusto = (Gusto)UnityEngine.Random.Range(0,5);
       
     }
 
     public Color Asignar_Color()
     {
-        Color color = Color.white;
+         color = Color.white;
 
-        int a = Random.Range(0, 4);
+        int a = UnityEngine.Random.Range(0, 4);
         switch (a)
         {
             case 0: color = Color.green; break;
@@ -70,26 +79,9 @@ public class Enemy : NPCS
         }
 
     }
-    void buscar()
-    {
-        foreach (GameObject a in objectos)
-        {
-           if (a != null)
-           {      
-                if (a.GetComponent<Hero>() || a.GetComponent<Ally>())
-                {
-                    float dist = Vector3.Distance(a.transform.position, transform.position);
 
-                    if (dist < 5f)
-                    {
-                         Vector3 direccion = a.transform.position - transform.position;
-                        dist = direccion.magnitude;
-                        transform.LookAt(a.transform.position);
-                        transform.position += Vector3.Normalize(a.transform.position - transform.position) * speed * Time.deltaTime;
-                    }
-                }
-           }
-      
-        }
+    public override Transform Identificar_enemigo(Type tipo_enemigo)
+    {
+        return base.Identificar_enemigo(tipo_enemigo);
     }
 }

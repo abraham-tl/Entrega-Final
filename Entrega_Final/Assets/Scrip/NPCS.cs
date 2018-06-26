@@ -7,33 +7,41 @@ public enum States
     Idle, Moving, Rotating, Reacting
 };
 
-public class NPCS : MonoBehaviour{
+public class NPCS : MonoBehaviour
+{
     bool active = false;
-     int edad = 0;
+    public int edad = 0;
     public float speed = 0f;
-    States state;
+    public States state;
     Vector3 rotating;
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
+    protected Transform myTransform;
+   
+    void Awake()
     {
-		if (!active)
+        myTransform = transform;
+    }
+    // Use this for initialization
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (!active)
         {
             Inicializar();
-            active = true;            
+            active = true;
         }
         //Movimiento();
         StartCoroutine(DecideState());
+       
     }
 
     public virtual void Inicializar()
     {
-       
+
         Asignar_edad();
         speed = ((100f - edad) / 50f);
         StartCoroutine(DecideState());
@@ -43,7 +51,7 @@ public class NPCS : MonoBehaviour{
 
     public void Movimiento()
     {
-        if(state == States.Moving)
+        if (state == States.Moving)
         {
             transform.position += transform.forward * speed * Time.deltaTime;
         }
@@ -53,10 +61,14 @@ public class NPCS : MonoBehaviour{
         }
         if (state == States.Reacting)
         {
-            
+          
         }
     }
 
+     public virtual void Reaccion()
+    {
+
+    }
     public void Asignar_edad()
     {
         edad = Random.Range(15, 101);
@@ -75,4 +87,25 @@ public class NPCS : MonoBehaviour{
     {
         return edad;
     }
+
+    public virtual Transform Identificar_enemigo(System.Type tipo_enemigo)
+    {
+        MonoBehaviour[] enemigos = (MonoBehaviour[])FindObjectsOfType(tipo_enemigo);
+        Transform enemigo = null;
+        float distancia_minima = float.MaxValue;
+        for (int i = 0; i < enemigos.Length; i++)
+        {
+            Transform enemyTransform = enemigos[i].GetComponent<Transform>();
+            Vector3 distanceVector = enemyTransform.position - myTransform.position;
+            float distancia = distanceVector.magnitude;
+            if(distancia <=5 && distancia < distancia_minima)
+            {
+                enemigo = enemyTransform;
+                distancia_minima = distancia;
+            }
+        }
+            return enemigo;
+    }
+
+    
 }

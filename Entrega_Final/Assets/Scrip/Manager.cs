@@ -42,11 +42,17 @@ public class Manager : MonoBehaviour
             cube.AddComponent<Rigidbody>();// se asigna un rigidbodi al objeto
                                            //    // Si es el primer cilo agrega el componente hero
 
-            int tipo = Random.Range(1, 3); //Aleatorio entre 1 y 2 agregar el componente zombie o ciudadano             
-            if (tipo == 2)
+            int tipo = Random.Range(0, 3); //Aleatorio entre 1 y 2 agregar el componente zombie o ciudadano             
+            if (tipo == 0)
             {
                 // si es dos se agrega el componente Zombie
-                cube.AddComponent(typeof(Enemy));
+                cube.AddComponent(typeof(Zombie));
+                cube.tag = "Zombie"; //Se le agraga un tag al objeto  ("Zombie")
+            }
+            else if(tipo == 1)  
+            {
+                // si es dos se agrega el componente Zombie
+                cube.AddComponent(typeof(Wolf));
                 cube.tag = "Zombie"; //Se le agraga un tag al objeto  ("Zombie")
             }
             else
@@ -57,7 +63,7 @@ public class Manager : MonoBehaviour
             }
 
 
-            boxes[k] = cube;//Se Guarda el Gameobject de la calse en el vector
+           // boxes[k] = cube;//Se Guarda el Gameobject de la calse en el vector
         }
         //Contar_NPCs();//Se llama el procedimiento para contal los NPC  
 
@@ -87,7 +93,7 @@ public class Manager : MonoBehaviour
         {
             canvas_go.gameObject.SetActive(true);
             Camera.main.transform.SetParent(null);
-            FindObjectOfType<Hero>().gameObject.SetActive(false);
+            //FindObjectOfType<Hero>().gameObject.SetActive(false);
         }
     }
     //Funcion que retorna un Vector3 para la posicion
