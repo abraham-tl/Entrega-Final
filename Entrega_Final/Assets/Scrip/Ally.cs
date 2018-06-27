@@ -22,7 +22,7 @@ public class Ally : NPCS {
 	// Update is called once per frame
 	void Update () {
         Movimiento();
-        target = Identificar_enemigo(typeof(Zombie));
+        target = Identificar_enemigo(typeof(Enemy));
         if (target)
         {
             state = States.Reacting;
@@ -47,7 +47,7 @@ public class Ally : NPCS {
     public override void Reaccion()
     {
         base.Reaccion();
-        transform.LookAt(target.transform.position);
+        //transform.LookAt(target.transform.position);
         transform.position += Vector3.Normalize(target.transform.position + transform.position) * speed * Time.deltaTime;
       
     }

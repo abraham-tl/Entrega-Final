@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33790462451406018}
   - component: {fileID: 23947338165629968}
   - component: {fileID: 65199899180653130}
-  - component: {fileID: 54166828698352196}
+  - component: {fileID: 54399550444329600}
   m_Layer: 5
   m_Name: ammo
   m_TagString: Ammo
@@ -72,7 +72,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1544491405242060}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54166828698352196
+--- !u!54 &54399550444329600
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -105,8 +105,8 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1544491405242060}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 4.3304415}
+  m_LocalRotation: {x: 0.00000070328497, y: 0.15128766, z: 0.00000092543456, w: 0.98848975}
+  m_LocalPosition: {x: 0, y: 0, z: 31.147137}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -114,6 +114,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -14.041016, y: -1167.9932}
+  m_AnchoredPosition: {x: 4.84772, y: -0.464}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}

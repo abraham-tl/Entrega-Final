@@ -53,7 +53,7 @@ public class Arma : MonoBehaviour {
     {
         Recargar(15);
         GameObject ammo = Instantiate(box_ammo);
-        ammo.transform.position = new Vector3(Random.Range(-20, 20), -0.5f, Random.Range(-20, 20));
+        ammo.transform.position = new Vector3(Random.Range(-20, 20), 0.5f, Random.Range(-20, 20));
         ammo.gameObject.tag = "Ammo";
     }
 }

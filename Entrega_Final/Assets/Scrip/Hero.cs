@@ -3,18 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 //using NPC.Enemy;
 //using NPC.Ally;
-public class Hero : MonoBehaviour
+public class Hero : Ally
 {
    public  float life = 100f; 
     void Start()
     {
         this.gameObject.GetComponent<Renderer>().material.color = Color.gray;// se asigna al heroe el color gris
-        //gameObject.AddComponent(typeof(FPSMove));//Se le asigna la clase FPSMove al GameObject para el movimiento
-        this.gameObject.tag = "Player";       //Se tagea el ciudadano
-        Camera.main.transform.localPosition = transform.position;//se le asigna a la camara la misposicion del heroe
-        Camera.main.transform.SetParent(gameObject.transform);//se hace la camara hija del heroe
-        Camera.main.gameObject.AddComponent<FPSAim>();//se le agrega la la clase FPSAim a la camara para la rotacion    
-        
+         this.gameObject.tag = "Player";       //Se tagea el ciudadano     
     }
 
     //procedimiento para cuando el heroe choque con otro objeto
@@ -36,6 +31,7 @@ public class Hero : MonoBehaviour
 
         if (collision.gameObject.tag == "Ammo")
         {
+            print("HOLA");
             FindObjectOfType<Arma>().Crear_Ammo();
             Destroy(collision.gameObject);
         }

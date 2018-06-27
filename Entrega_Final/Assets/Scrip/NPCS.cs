@@ -69,6 +69,7 @@ public class NPCS : MonoBehaviour
     {
 
     }
+
     public void Asignar_edad()
     {
         edad = Random.Range(15, 101);
