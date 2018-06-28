@@ -9,7 +9,7 @@ public enum States
 
 public class NPCS : MonoBehaviour
 {
-    bool active = false;
+    bool active = false;//
     public int edad = 0;
     public float speed = 0f;
     public States state;
@@ -34,19 +34,15 @@ public class NPCS : MonoBehaviour
             Inicializar();
             active = true;
         }
-        //Movimiento();
-        StartCoroutine(DecideState());
-       
+        StartCoroutine(DecideState());      
     }
 
     public virtual void Inicializar()
     {
-
-        Asignar_edad();
-        speed = ((100f - edad) / 50f);
-        StartCoroutine(DecideState());
+        Asignar_edad();//asigna al NPC una edad aleatoria
+        speed = ((100f - edad) / 50f); //asigna al NPC una velocidad con base en la edad
+        StartCoroutine(DecideState()); //inicia una corrutina para los estados
     }
-
 
 
     public void Movimiento()

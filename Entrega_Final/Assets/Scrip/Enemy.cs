@@ -12,13 +12,11 @@ Cerebro, Pierna, Brazo,Ojos,Cuello
 public class Enemy : NPCS
 {
     Gusto gusto;
-    GameObject[] objectos;
     public Color color;
     // Use this for initialization
     void Start ()
     {
        Inicializar();
-       objectos = GameObject.FindObjectsOfType(typeof(GameObject)) as GameObject[];
     }
 	
 	// Update is called once per frame
@@ -26,13 +24,6 @@ public class Enemy : NPCS
     {
         Movimiento();
         Identificar_enemigo(typeof(Ally));
-        //if (target)
-        //{
-        //    state = States.Reacting;
-
-        //    Reaccion();
-        //}
-        //buscar();
     }
 
     public override void Inicializar()
@@ -61,14 +52,6 @@ public class Enemy : NPCS
 
     public void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Bala")
-        {
-            FindObjectOfType<Manager>().Eliminar_Enemy();
-            Destroy(collision.gameObject);
-            Destroy(gameObject);
-          
-        }
-
         if (collision.gameObject.tag == "Ciudadano")
         {
             Ally a = collision.gameObject.GetComponent<Ally>();    
@@ -80,6 +63,10 @@ public class Enemy : NPCS
 
     }
 
+    public void Destruir_enemy()
+    {
+        FindObjectOfType<Manager>().Eliminar_Enemy();
+    }
     public override Transform Identificar_enemigo(Type tipo_enemigo)
     {
         return base.Identificar_enemigo(tipo_enemigo);

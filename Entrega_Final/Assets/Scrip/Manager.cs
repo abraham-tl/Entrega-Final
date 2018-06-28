@@ -14,25 +14,84 @@ public class Manager : MonoBehaviour
     public Image imagen;
     public int numboxes; //Variable para asignar numeros de instancia
 
+    public static int enemyNumber; //Variable intera para guardar la cantidad de enemigos
+    public static int allyNumber;//Variable intera para guardar la cantidad de Ciudadanos
 
-    public GameObject[] boxes; //Vector para guardar los personajes
+    public int vida; //Variable intera para guardar la cantidad de sangre del Player
 
-    public static int enemyNumber;
-    public static int allyNumber;
+    public Canvas canvas_go; //canvas para el game over
+    public Canvas canvas_winer; //canvas para ganar
 
-    public int vida;
-
-    public Canvas canvas_go;
-    public Canvas canvas_winer;
-
-    public float max_imagen, min_imagen;
+    public float max_imagen, min_imagen; //variables flotantes para el canvas sansangre
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        Reiniciar_juego();
+    }
+
+    private void Update()
+    {   
+        //si el numero de enemigos es inferior o igual a cero activa el canvas para ganar (WINNER)
+        if (enemyNumber <= 0 )
+        {
+            canvas_winer.gameObject.SetActive(true);
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+        //si el numero de Ciudadanos es inferior o igual a cero activa el canvas para game over
+        if (allyNumber <= 0 || vida <= 0)
+        {
+            canvas_go.gameObject.SetActive(true);
+            Camera.main.transform.SetParent(null);
+           // FindObjectOfType<Hero>().gameObject.SetActive(false);
+        }
+    }
+    //Funcion que retorna un Vector3 para la posicion
+    Vector3 Asignar_Posicion()
+        {
+            Vector3 pos = new Vector3();
+            pos.x = Random.Range(-20, 20);
+            pos.y = -0.5f;
+            pos.z = Random.Range(-20, 20);
+            return pos;
+        }
+
+    //metodo  para descontar la cantidad de enemy y actualiza el canvas
+    public void Eliminar_Enemy()
+    {
+        enemyNumber--;
+        num_enemy.text = enemyNumber.ToString();
+    }
+
+    //metodo  para aumentar la cantidad de enemy y actualiza el canvas
+    public void Crear_Enemy()
+    {
+        enemyNumber++;
+        num_enemy.text = enemyNumber.ToString();
+    }
+
+    //metodo  para disminuir la cantidad de vida y actualiza el canvas
+    public void Bajar_Vida()
+    {    
+        vida = vida - 80;
+        imagen.fillAmount = (vida) / max_imagen;
+    }
+    //metodo  para descontar la cantidad de Ally y actualiza el canvas
+    public void Eliminar_Ally()
+    {
+       allyNumber --;
+       num_ally.text = allyNumber.ToString();
+    }
+
+
+    public void Reiniciar_juego()
+    {
+        canvas_go.gameObject.SetActive(false);
+        canvas_winer.gameObject.SetActive(false);
+
+        Cursor.lockState = CursorLockMode.Locked;//detiene el cursor de la pantalla
         numboxes = Random.Range(10, 20);// aleatorio para el numero de instancias
-        vida = 400;
-        max_imagen = vida;
+        vida = 400; //inicia la sangre en 400
+        max_imagen = vida; //el maximo de la vida para el canvas de la vida
 
         ////Ciclo para crear las instancias
         for (int k = 0; k < numboxes; k++)
@@ -49,7 +108,7 @@ public class Manager : MonoBehaviour
                 cube.AddComponent(typeof(Zombie));
                 cube.tag = "Zombie"; //Se le agraga un tag al objeto  ("Zombie")
             }
-            else if(tipo == 1)  
+            else if (tipo == 1)
             {
                 // si es dos se agrega el componente Zombie
                 cube.AddComponent(typeof(Wolf));
@@ -63,77 +122,15 @@ public class Manager : MonoBehaviour
             }
 
 
-           // boxes[k] = cube;//Se Guarda el Gameobject de la calse en el vector
+            // boxes[k] = cube;//Se Guarda el Gameobject de la calse en el vector
         }
-        //Contar_NPCs();//Se llama el procedimiento para contal los NPC  
-
-
-
+        //Este segmento cuenta los NPC, los asigna a un entero y los lleva a los respectivos canvas
         Enemy[] enemies = FindObjectsOfType<Enemy>();
         enemyNumber = enemies.Length;
         num_enemy.text = enemyNumber.ToString();
 
         Ally[] allies = FindObjectsOfType<Ally>();
-        allyNumber = allies.Length;
-        num_ally.text = allyNumber.ToString();
-
-        // Canvas[] canvas_ = FindObjectOfType<Canvas>();
-        //print(enemies[0].gameObject.transform.position);
-    }
-
-    private void Update()
-    {
-        
-        if (enemyNumber <= 0 )
-        {
-            canvas_winer.gameObject.SetActive(true);
-            Cursor.lockState = CursorLockMode.Confined;
-        }
-        if (allyNumber <= 0 || vida <= 0)
-        {
-            canvas_go.gameObject.SetActive(true);
-            Camera.main.transform.SetParent(null);
-            //FindObjectOfType<Hero>().gameObject.SetActive(false);
-        }
-    }
-    //Funcion que retorna un Vector3 para la posicion
-
-
-
-    Vector3 Asignar_Posicion()
-        {
-            Vector3 pos = new Vector3();
-            pos.x = Random.Range(-20, 20);
-            pos.y = -0.5f;
-            pos.z = Random.Range(-20, 20);
-            return pos;
-        }
-
-    public void Eliminar_Enemy()
-    {
-        enemyNumber--;
-        //print(num_enemy);
-        num_enemy.text = enemyNumber.ToString();
-    }
-    public void Crear_Enemy()
-    {
-        enemyNumber++;
-        //print(num_enemy);
-        num_enemy.text = enemyNumber.ToString();
-    }
-
-    public void Bajar_Vida()
-    {    
-        vida = vida - 80;
-        imagen.fillAmount = (vida) / max_imagen;
-    }
-
-    public void Eliminar_Ally()
-    {
-       allyNumber --;
+        allyNumber = allies.Length - 1;
         num_ally.text = allyNumber.ToString();
     }
-
-
-
 }

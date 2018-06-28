@@ -16,7 +16,6 @@ public class Zombie : Enemy {
         if (target)
         {
             state = States.Reacting;
-
             Reaccion();
         }
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Arma : MonoBehaviour {
+public sealed class Arma : MonoBehaviour {
     public Text num_amon;
 
     public float rotationSpeed = 150.0F;
@@ -26,21 +26,19 @@ public class Arma : MonoBehaviour {
 
         if (Input.GetButtonDown("Fire1") && amon > 0)
         {
-            Dispara();
-           
-
+            RaycastHit disparo;
+            if(Physics.Raycast(Camera.main.transform.position,Camera.main.transform.TransformDirection(Vector3.forward),out disparo, Mathf.Infinity))
+            {
+                Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward) * disparo.distance, Color.yellow);
+                if (disparo.collider.GetComponent<Enemy>() != null)
+                {
+                    disparo.collider.gameObject.GetComponent<Enemy>().Destruir_enemy();
+                    Destroy(disparo.collider.gameObject);                 
+                }
+            }
+            amon--;
+            num_amon.text = amon.ToString();
         }
-    }
-
-    void Dispara()
-    {
-        GameObject bala = Instantiate(proyectil, inicio.position, inicio.rotation);
-        bala.GetComponent<Rigidbody>().AddForce(bala.transform.forward * force, ForceMode.Impulse);
-        amon--;
-        num_amon.text = amon.ToString();
-        //ruido.PlayOneShot(sonidodisparo);
-        Destroy(bala,2.5f);
-       
     }
 
     public void Recargar(int a)
@@ -53,7 +51,7 @@ public class Arma : MonoBehaviour {
     {
         Recargar(15);
         GameObject ammo = Instantiate(box_ammo);
-        ammo.transform.position = new Vector3(Random.Range(-20, 20), 0.5f, Random.Range(-20, 20));
+        ammo.transform.position = new Vector3(Random.Range(-20, 20), 1f, Random.Range(-20, 20));
         ammo.gameObject.tag = "Ammo";
     }
 }

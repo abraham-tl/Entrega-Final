@@ -3,7 +3,11 @@ guid: 3500ed2a91d18f948b56c709b5c0f34d
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - num_amon: {instanceID: 0}
+  - proyectil: {instanceID: 0}
+  - box_ammo: {fileID: 1361327175143140, guid: 19d32440c25b3cb4ca57a6f86c9e67d5, type: 2}
+  - inicio: {fileID: 4712622623427070, guid: 19d32440c25b3cb4ca57a6f86c9e67d5, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

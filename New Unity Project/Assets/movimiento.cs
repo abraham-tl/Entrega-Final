@@ -7,6 +7,10 @@ public class movimiento : MonoBehaviour
     public Rigidbody2D megaman;
     public bool posi = false;
     public SpriteRenderer Rotamela;
+    public float impulse = 10f;
+    public float velocidadcorrer = 5f;
+    public Animator CaminaMegaman;
+
 	void Start () 
 	{
         
@@ -28,13 +32,35 @@ public class movimiento : MonoBehaviour
 
         if (Hori < 0)
         {
-            Rotamela.flipX = true;
+            transform.localScale = new Vector3(-1, 1, 1);
+            
         }
-        if (Hori > 0)
+        else if (Hori > 0)
         {
-            Rotamela.flipX = false;
+            transform.localScale = new Vector3(1, 1, 1);
+            
         }
-	}
+
+        megaman.velocity = new Vector2(velocidadcorrer * Hori, megaman.velocity.y);
+
+        if (Hori < 0.05 && Hori > -0.05)
+        {
+            CaminaMegaman.SetBool("Camina", false);
+        }
+        else
+        {
+            CaminaMegaman.SetBool("Camina", true);
+        }
+
+        if (Input.GetKey("z"))
+        {
+            CaminaMegaman.SetBool("Agacha", true);
+        }
+        else
+        {
+            CaminaMegaman.SetBool("Agacha", false);
+        }
+    }
 
     void OnCollisionEnter2D()
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FPSAim : MonoBehaviour {
+public sealed class FPSAim : MonoBehaviour {
    public  FPSMove  _rotations;
     float mousex;
     float mousey;

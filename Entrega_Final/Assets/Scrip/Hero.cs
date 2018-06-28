@@ -31,7 +31,6 @@ public class Hero : Ally
 
         if (collision.gameObject.tag == "Ammo")
         {
-            print("HOLA");
             FindObjectOfType<Arma>().Crear_Ammo();
             Destroy(collision.gameObject);
         }
