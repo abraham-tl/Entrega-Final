@@ -9,11 +9,11 @@ public class Zombie : Enemy {
         Inicializar();
 	}
 	
-	// Update is called once per frame
+	// en el Update llama la funsion buscar enemigo si esta serca retorna transform,
 	void Update () {
         Movimiento();
         target = Identificar_enemigo(typeof(Ally));
-        if (target)
+        if (target)//si lo retorna reaciona segun el objeto
         {
             state = States.Reacting;
             Reaccion();
@@ -29,6 +29,6 @@ public class Zombie : Enemy {
     {
         base.Reaccion();
         transform.LookAt(target.transform.position);
-        transform.position += Vector3.Normalize(target.transform.position - transform.position) * speed * Time.deltaTime;
+        transform.position += Vector3.Normalize(target.transform.position - transform.position) * speed * Time.deltaTime;//desplaza Game object
     }
 }
