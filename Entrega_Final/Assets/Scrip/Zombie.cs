@@ -3,32 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Zombie : Enemy {
-    Transform target;
-    // Use this for initialization
+ 
     void Start () {
         Inicializar();
 	}
-	
-	// en el Update llama la funsion buscar enemigo si esta serca retorna transform,
-	void Update () {
-        Movimiento();
-        target = Identificar_enemigo(typeof(Ally));
-        if (target)//si lo retorna reaciona segun el objeto
-        {
-            state = States.Reacting;
-            Reaccion();
-        }
-    }
-
+	//Instancia un zombie
     public override void Inicializar()
     {
         base.Inicializar();     
     }
 
-    public override void Reaccion()
-    {
-        base.Reaccion();
-        transform.LookAt(target.transform.position);
-        transform.position += Vector3.Normalize(target.transform.position - transform.position) * speed * Time.deltaTime;//desplaza Game object
-    }
 }

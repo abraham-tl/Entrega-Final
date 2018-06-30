@@ -99,8 +99,6 @@ public class Manager : MonoBehaviour
             GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube); //se crea una primitiva en la variable Game Object
             cube.transform.position = Asignar_Posicion();//Se asigna una posisicion en el plano
             cube.AddComponent<Rigidbody>();// se asigna un rigidbodi al objeto
-                                           //    // Si es el primer cilo agrega el componente hero
-
             int tipo = Random.Range(0, 3); //Aleatorio entre 1 y 2 agregar el componente zombie o ciudadano             
             if (tipo == 0)
             {
@@ -121,8 +119,6 @@ public class Manager : MonoBehaviour
                 cube.tag = "Ciudadano";//Se le agraga un tag al objeto  (Ciudadano")
             }
 
-
-            // boxes[k] = cube;//Se Guarda el Gameobject de la calse en el vector
         }
         //Este segmento cuenta los NPC, los asigna a un entero y los lleva a los respectivos canvas
         Enemy[] enemies = FindObjectsOfType<Enemy>();

@@ -3,17 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//enum para el gusto de los enemy
-public enum Gusto
-{
-Cerebro, Pierna, Brazo,Ojos,Cuello
-};
-
-
 public class Enemy : NPCS
 {
-    Gusto gusto;
     public Color color;
+    Transform target;
     // Use this for initialization
     void Start ()
     {
@@ -24,22 +17,24 @@ public class Enemy : NPCS
 	void Update ()
     {
         Movimiento();//le da movimiento al ENEMY
-        Identificar_enemigo(typeof(Ally));//envia el tipo de enemigo y busca si hay uno cercano
+        target = Identificar_enemigo(typeof(Ally));//envia el tipo de enemigo y busca si hay uno cercano     
+        if (target)//si lo retorna reaciona segun el objeto
+        {
+            state = States.Reacting;
+            Reaccion();
+        }
     }
 
     public override void Inicializar()
     {
         base.Inicializar();
-        Asignar_Color();//Asigna un color a la primitiva del ENEMY
-        gusto = (Gusto)UnityEngine.Random.Range(0,5);//Asigna un gusto aleatorio Al NPC
-      
+       Asignar_Color();//Asigna un color a la primitiva del ENEMY
     }
 
 //metodo para asignar un color aleatorio al ENEMY
     public Color Asignar_Color()
     {
          color = Color.white;
-
         int a = UnityEngine.Random.Range(0, 4);
         switch (a)
         {
@@ -63,16 +58,22 @@ public class Enemy : NPCS
             FindObjectOfType<Manager>().Crear_Enemy();
             FindObjectOfType<Manager>().Eliminar_Ally();
         }
-
     }
 //metodo para destruir el enemy
     public void Destruir_enemy()
     {
         FindObjectOfType<Manager>().Eliminar_Enemy();
     }
-    metodo para buscar el enemigo del Enemy
+    //metodo para buscar el enemigo del Enemy
     public override Transform Identificar_enemigo(Type tipo_enemigo)
     {
         return base.Identificar_enemigo(tipo_enemigo);
+    }
+    //reacciona el enemi para perseguir el enemigo
+    public override void Reaccion()
+    {
+        base.Reaccion();
+        transform.LookAt(target.transform.position);
+        transform.position += Vector3.Normalize(target.transform.position - transform.position) * speed * Time.deltaTime;//desplaza Game object
     }
 }

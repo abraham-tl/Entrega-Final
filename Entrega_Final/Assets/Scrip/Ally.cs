@@ -9,14 +9,11 @@ public enum nombre
 
 public class Ally : NPCS {
     //public nombre name;
-
     Transform target;
     // Use this for initialization
     void Start () {
         Inicializar();
         gameObject.GetComponent<Renderer>().material.color = Color.yellow;
-        //Asignar_Nombre();
-    
 	}
 	
 	// Update is called once per frame
@@ -25,17 +22,10 @@ public class Ally : NPCS {
         target = Identificar_enemigo(typeof(Enemy));
         if (target)
         {
-            state = States.Reacting;
-            
+            state = States.Reacting;      
             Reaccion();
         }
     }
-
-    //void Asignar_Nombre()
-    //{
-       
-    //    name = (nombre)Random.Range(0, 20);
-    //}
 
     public static implicit operator Enemy(Ally ally)
     {
@@ -44,17 +34,16 @@ public class Ally : NPCS {
         Destroy(ally);
         return e;
     }
+
     public override void Reaccion()
     {
         base.Reaccion();
-        //transform.LookAt(target.transform.position);
         transform.position += Vector3.Normalize(target.transform.position + transform.position) * speed * Time.deltaTime;
       
     }
+
     public override Transform Identificar_enemigo(Type tipo_enemigo)
     {
         return base.Identificar_enemigo(tipo_enemigo);
     }
-
-
 }
